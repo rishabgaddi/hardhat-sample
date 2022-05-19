@@ -13,7 +13,10 @@ contract ZombieHelper is ZombieFeeding {
         external
         aboveLevel(2, _zombieId)
     {
-        require(msg.sender == zombieToOwner[_zombieId]);
+        require(
+            msg.sender == zombieToOwner[_zombieId],
+            "You don't own this zombie"
+        );
         zombies[_zombieId].name = _newName;
     }
 
@@ -21,7 +24,10 @@ contract ZombieHelper is ZombieFeeding {
         external
         aboveLevel(20, _zombieId)
     {
-        require(msg.sender == zombieToOwner[_zombieId]);
+        require(
+            msg.sender == zombieToOwner[_zombieId],
+            "You don't own this zombie"
+        );
         zombies[_zombieId].dna = _newDna;
     }
 

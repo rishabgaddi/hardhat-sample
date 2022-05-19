@@ -9,5 +9,14 @@ describe("ZombieFeeding smart contract", () => {
     zombieFeeding = await ZombieFeeding.deploy();
   });
 
-  it("", async () => {});
+  it("Only the owner should be able to set the CryptoKitties smart contract", async () => {
+    await zombieFeeding
+      .connect(owner)
+      .setKittyContractAddress("0x0000000000000000000000000000000000000000");
+
+    await zombieFeeding
+      .connect(user)
+      .setKittyContractAddress("0x0000000000000000000000000000000000000000")
+      .should.be.revertedWith("Ownable: caller is not the owner");
+  });
 });
