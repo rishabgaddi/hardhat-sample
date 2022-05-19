@@ -28,8 +28,9 @@ describe("ZombieFactory smart contract", () => {
     const zombies = await zombieFactory.getZombies();
     expect(zombies.length).to.equal(2);
 
-    await expect(
-      zombieFactory.connect(user2).createRandomZombie("Jad")
-    ).to.be.revertedWith("You already have a zombie");
+    await zombieFactory
+      .connect(user2)
+      .createRandomZombie("Jad")
+      .should.be.revertedWith("You already have a zombie.");
   });
 });
